@@ -1,8 +1,8 @@
 package com.nekromant.zoo.service;
 
 import com.nekromant.zoo.dao.RoomDAO;
-import com.nekromant.zoo.model.Book;
 import com.nekromant.zoo.model.Room;
+import dto.BookDTO;
 import dto.RoomDTO;
 import enums.AnimalType;
 import enums.RoomType;
@@ -18,7 +18,7 @@ public class RoomService {
     private RoomDAO roomDAO;
 
     @Autowired
-    private BookService bookService;
+    private BookingService bookService;
 
     public Room insert(Room room){
         return roomDAO.save(room);
@@ -58,7 +58,7 @@ public class RoomService {
                 roomDTO.getVideoSupported()
         );
         for(Room room : rooms) {
-            List<Book> books = bookService.findByRoomIdAndDate(
+            List<BookDTO> books = bookService.findByRoomIdAndDate(
                     String.valueOf(room.getId()),
                     roomDTO.getBegin(),
                     roomDTO.getEnd()
